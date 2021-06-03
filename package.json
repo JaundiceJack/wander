@@ -1,0 +1,28 @@
+{
+  "name": "wfw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "client-install": "npm install --prefix public",
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix public",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "prod": "NPM_CONFIG_PRODUCTION=true NODE_ENV='production' npm run server",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix public && npm run build_craco --prefix public"
+  },
+  "author": "James McNeilan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.7"
+  },
+  "engines": {
+    "node": "14.16.0",
+    "npm": "6.14.11"
+  }
+}
