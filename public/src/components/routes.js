@@ -12,11 +12,12 @@ import About     from './about';
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/"          component={Home} />
+      <Route exact path="/home" component={Home} />
       <Route exact path="/wildlife"  component={Wildlife} />
       <Route exact path="/landscape" component={Landscape} />
       <Route exact path="/history"   component={History} />
       <Route exact path="/about"     component={About} />
+      <Route exact path="/" component={Home} />
     </Switch>
   )
 }

@@ -1,8 +1,19 @@
+// Import basics
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+// Import actions
+import { changePage } from '../actions/pageActions';
 // Import Icons
 import { GiFlatPawPrint } from 'react-icons/gi';
 import { FaLandmark, FaMountain } from 'react-icons/fa';
+// Import router stuff
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
+  // Get the nav button to highlight from the current page
+  const page = useSelector( state => state.page.currentPage );
+
   // Compose Classes
   const navCs = "absolute top-0 sm:left-0 text-center sm:text-left \
     w-full sm:w-auto px-2 sm:px-0";
@@ -18,22 +29,39 @@ const Nav = () => {
     flex items-center justify-center cursor-pointer";
   const navIconCs = "text-2xl text-yellow-500 ";
 
+  // Change the highlighted page icon
+  const dispatch = useDispatch();
+  const changeActive = nextPage => { dispatch(changePage(nextPage)) }
 
   return (
     <nav className={navCs}>
       <ul id="categories" className={containerCs}>
-        <li id="logo" className={logoCs}>
+        <Link to="/home"
+              className={logoCs}
+              onClick={() => changeActive('home')}>
           <p className={logoTextCs}>WFW</p>
-        </li>
-        <li className={"bg-image-animal mt-1 sm:mx-1 "+navButtonCs}>
+        </Link>
+        <Link to="/wildlife"
+              className={page === 'wildlife' ?
+              "bg-image-animal mt-1 sm:mx-1 border-2 border-green-400 " + navButtonCs :
+              "bg-image-animal mt-1 sm:mx-1 " + navButtonCs}
+              onClick={() => changeActive('wildlife')}>
           <GiFlatPawPrint className={navIconCs} />
-        </li>
-        <li className={"bg-image-mountain mt-1 sm:mx-1 "+navButtonCs}>
+        </Link>
+        <Link to="/landscape"
+              className={page === 'landscape' ?
+              "bg-image-mountain mt-1 sm:mx-1 border-2 border-green-400 " + navButtonCs :
+              "bg-image-mountain mt-1 sm:mx-1 " + navButtonCs}
+              onClick={() => changeActive('landscape')}>
           <FaMountain className={navIconCs} />
-        </li>
-        <li className={"bg-image-ruin sm:absolute sm:top-16 sm:left-16 "+navButtonCs}>
+        </Link>
+        <Link to="/history"
+              className={page === 'history' ?
+              "bg-image-ruin sm:absolute sm:top-16 sm:left-16 border-2 border-green-400 " + navButtonCs :
+              "bg-image-ruin sm:absolute sm:top-16 sm:left-16 " + navButtonCs}
+              onClick={() => changeActive('history')}>
           <FaLandmark className={navIconCs} />
-        </li>
+        </Link>
       </ul>
     </nav>
   )

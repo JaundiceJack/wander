@@ -2,41 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-mont { font-family: 'Montserrat Alternates', 'Arial'; }
+.text-shadow { text-shadow: -1px -1px 1px #234; }
+.text-flip { transform: scale(-1, 1) rotate(-90deg); }
+
 .bg-image-chip {
-  background-image: url('//live.staticflickr.com/65535/50186304658_51a564c73d_k.jpg');
+  background-image: url('./images/chipmunks.jpg');
   background-size: cover;
   background-position: center;
 }
 
 .bg-image-field {
-  background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80');
+  background-image: url('./images/field.jpg');
   background-size: cover;
   background-position: center;
   box-shadow: 0px 0px 5px #000;
 }
 
-.font-mont { font-family: 'Montserrat Alternates', 'Arial'; }
-
 .bg-image-mountain {
-  background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80');
+  background-image: url('./images/mountain.jpg');
   background-size: cover;
   background-position: center;
   box-shadow: 0px 0px 5px #000;
 }
 
 .bg-image-ruin {
-  background-image: url('https://images.unsplash.com/photo-1513733582371-0adb4dac50f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80');
+  background-image: url('./images/ruin.jpg');
   background-size: cover;
   background-position: center;
   box-shadow: 0px 0px 5px #000;
 }
 
 .bg-image-animal {
-  background-image: url('https://images.unsplash.com/photo-1588508435560-585279aa19de?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80');
+  background-image: url('./images/deer.jpg');
   background-size: cover;
   background-position: center;
   box-shadow: 0px 0px 5px #000;
 }
-
-.text-shadow { text-shadow: -1px -1px 2px #234; }
-.text-flip { transform: scale(-1, 1) rotate(-90deg); }
