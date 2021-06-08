@@ -2,40 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-.font-mont { font-family: 'Montserrat Alternates', 'Arial'; }
-.text-shadow { text-shadow: -1px -1px 1px #234; }
-.text-flip { transform: scale(-1, 1) rotate(-90deg); }
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
 
 .bg-image-chip {
   background-image: url('./images/chipmunks.jpg');
   background-size: cover;
   background-position: center;
 }
-
-.bg-image-field {
-  background-image: url('./images/field.jpg');
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0px 0px 5px #000;
-}
-
 .bg-image-mountain {
-  background-image: url('./images/mountain.jpg');
+  background-image: url('./images/nav/mountain.jpg');
   background-size: cover;
   background-position: center;
   box-shadow: 0px 0px 5px #000;
 }
-
 .bg-image-ruin {
-  background-image: url('./images/ruin.jpg');
+  background-image: url('./images/nav/ruin.jpg');
   background-size: cover;
   background-position: center;
   box-shadow: 0px 0px 5px #000;
 }
-
 .bg-image-animal {
-  background-image: url('./images/deer.jpg');
+  background-image: url('./images/nav/deer.jpg');
   background-size: cover;
   background-position: center;
   box-shadow: 0px 0px 5px #000;
+}
+.bg-image-field {
+  background-image: url('./images/nav/field.jpg');
+  background-size: 100px 100px;
+  background-position: 0px 0px;
+  box-shadow: 0px 0px 5px #000;
+}
+
+.font-mont { font-family: 'Montserrat Alternates', 'Arial'; }
+.text-shadow { text-shadow: -1px 0px 0px #567; }
+.text-flip { transform: rotate(-45deg); }
+.nav-resize:hover { width: 7rem; }
+.clip-it {
+  -webkit-clip-path: polygon(50% 0%, 100% 0%, 0% 100%, 0% 50%);
+  clip-path: polygon(50% 0%, 100% 0%, 0% 100%, 0% 50%);
+}
+
+@media (max-width: 640px) {
+  .clip-it { -webkit-clip-path: none; clip-path: none; }
+  .text-flip { transform: rotate(0deg); }
+  .bg-image-field { background-size: cover; background-position: right; }
 }

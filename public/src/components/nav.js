@@ -5,17 +5,19 @@ import PropTypes from 'prop-types';
 // Import actions
 import { changePage } from '../actions/pageActions';
 // Import Icons
-import { GiFlatPawPrint } from 'react-icons/gi';
+import { GiFlatPawPrint, GiPeaks } from 'react-icons/gi';
 import { FaLandmark, FaMountain } from 'react-icons/fa';
 // Import router stuff
 import { Link } from 'react-router-dom';
+// Import Components
+import Navlink from './navlink';
 
 const Nav = () => {
   // Get the nav button to highlight from the current page
   const page = useSelector( state => state.page.currentPage );
 
   // Compose Classes
-  const navCs = "absolute top-0 sm:left-0 text-center sm:text-left \
+  const navCs = "z-10 absolute top-0 sm:left-0 text-center sm:text-left \
     w-full sm:w-auto px-2 sm:px-0";
   const containerCs = "relative grid grid-cols-3 sm:grid-cols-2 gap-2 \
     sm:items-start items-center";
@@ -24,47 +26,86 @@ const Nav = () => {
     transform duration-75 hover:scale-105 flex";
   const logoTextCs = "ml-1 font-bold font-mont text-xl bg-clip-text \
     text-transparent bg-gradient-to-br from-yellow-500 via-blue-200";
-  const navButtonCs = "h-14 w-2/3 sm:w-14 rounded-xl sm:rounded-full mx-auto \
-    transform duration-75 hover:scale-110 \
-    flex items-center justify-center cursor-pointer";
-  const navIconCs = "text-2xl text-yellow-500 ";
+  const navIconCs = "text-yellow-500 shadow-xl \
+    group-hover:opacity-0 transition duration-300 ";
+
 
   // Change the highlighted page icon
   const dispatch = useDispatch();
   const changeActive = nextPage => { dispatch(changePage(nextPage)) }
 
   return (
-    <nav className={navCs}>
-      <ul id="categories" className={containerCs}>
-        <Link to="/home"
-              className={logoCs}
-              onClick={() => changeActive('home')}>
-          <p className={logoTextCs}>WFW</p>
+    <nav className="absolute top-0 sm:left-0 w-full sm:w-auto text-center sm:text-left">
+      <div className="relative grid grid-cols-3 gap-3 justify-items-center px-2 sm:px-0">
+
+        <Link id="logo"
+              onClick={() => changeActive('home')}
+              to="/home"
+              className="bg-image-field col-span-3 sm:col-span-1 h-12 sm:h-24 \
+                w-full sm:w-24 clip-it sm:rounded-b-none rounded-b-lg \
+                transform duration-75 hover:scale-105 flex">
+          <p className="mx-auto mt-0 sm:ml-2 sm:mt-5 self-center sm:self-start \
+            text-flip font-bold font-mont text-xl bg-clip-text text-transparent \
+            bg-gradient-to-tl from-blue-300 via-yellow-200 to-blue-300">WFW</p>
         </Link>
-        <Link to="/wildlife"
-              className={page === 'wildlife' ?
-              "bg-image-animal mt-1 sm:mx-1 border-2 border-green-400 " + navButtonCs :
-              "bg-image-animal mt-1 sm:mx-1 " + navButtonCs}
-              onClick={() => changeActive('wildlife')}>
-          <GiFlatPawPrint className={navIconCs} />
-        </Link>
-        <Link to="/landscape"
-              className={page === 'landscape' ?
-              "bg-image-mountain mt-1 sm:mx-1 border-2 border-green-400 " + navButtonCs :
-              "bg-image-mountain mt-1 sm:mx-1 " + navButtonCs}
-              onClick={() => changeActive('landscape')}>
-          <FaMountain className={navIconCs} />
-        </Link>
-        <Link to="/history"
-              className={page === 'history' ?
-              "bg-image-ruin sm:absolute sm:top-16 sm:left-16 border-2 border-green-400 " + navButtonCs :
-              "bg-image-ruin sm:absolute sm:top-16 sm:left-16 " + navButtonCs}
-              onClick={() => changeActive('history')}>
-          <FaLandmark className={navIconCs} />
-        </Link>
-      </ul>
-    </nav>
+
+        <Navlink target="/wildlife"
+                 text="Wildlife"
+                 icon=<GiFlatPawPrint className={navIconCs+" text-3xl"} />
+                 onClick={() => changeActive('wildlife')}
+                 extraClasses={ page === 'wildlife' ?
+                 "border-2 border-green-500 bg-image-animal sm:top-0.5 sm:left-24" :
+                 "bg-image-animal sm:top-0.5 sm:left-24"} />
+        <Navlink target="/history"
+                 text="History"
+                 icon=<FaLandmark className={navIconCs+" text-2xl"} />
+                 onClick={() => changeActive('history')}
+                 extraClasses={ page === 'history' ?
+                 "border-2 border-green-500 bg-image-ruin sm:mt-0.5 sm:ml-0.5 sm:top-12 sm:left-12" :
+                 "bg-image-ruin sm:mt-0.5 sm:ml-0.5 sm:top-12 sm:left-12"} />
+        <Navlink target="/landscape"
+                 text="Landscape"
+                 icon=<GiPeaks className={navIconCs+" text-4xl"} />
+                 onClick={() => changeActive('landscape')}
+                 extraClasses={ page === 'landscape' ?
+                 "border-2 border-green-500 bg-image-mountain sm:top-24 sm:left-0.5" :
+                 "bg-image-mountain sm:top-24 sm:left-0.5"} />
+      </div>
+  </nav>
   )
 }
 
 export default Nav;
+
+/*
+<nav className={navCs}>
+  <ul id="categories" className={containerCs}>
+    <Link to="/home"
+          className={logoCs}
+          onClick={() => changeActive('home')}>
+      <p className={logoTextCs}>WFW</p>
+    </Link>
+    <Link to="/wildlife"
+          className={page === 'wildlife' ?
+          "bg-image-animal mt-1 sm:mx-1 border-2 border-green-400 " + navButtonCs :
+          "bg-image-animal mt-1 sm:mx-1 " + navButtonCs}
+          onClick={() => changeActive('wildlife')}>
+      <GiFlatPawPrint className={navIconCs} />
+    </Link>
+    <Link to="/landscape"
+          className={page === 'landscape' ?
+          "bg-image-mountain mt-1 sm:mx-1 border-2 border-green-400 " + navButtonCs :
+          "bg-image-mountain mt-1 sm:mx-1 " + navButtonCs}
+          onClick={() => changeActive('landscape')}>
+      <FaMountain className={navIconCs} />
+    </Link>
+    <Link to="/history"
+          className={page === 'history' ?
+          "bg-image-ruin sm:absolute sm:top-16 sm:left-16 border-2 border-green-400 " + navButtonCs :
+          "bg-image-ruin sm:absolute sm:top-16 sm:left-16 " + navButtonCs}
+          onClick={() => changeActive('history')}>
+      <FaLandmark className={navIconCs} />
+    </Link>
+  </ul>
+</nav>
+*/
