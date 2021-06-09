@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 // Import actions
-import { changePage } from '../actions/pageActions';
+import { changePage } from '../actions/authActions';
 // Import router stuff
 import { Link } from 'react-router-dom';
 

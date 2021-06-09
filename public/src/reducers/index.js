@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux';
-import pageReducer from './pageReducer.js';
+import authReducer from './authReducer.js';
+import errorReducer from './errorReducer.js';
 
 export default combineReducers({
-  page: pageReducer,
+  auth: authReducer,
+  error: errorReducer
 })

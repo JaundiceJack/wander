@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 // Import actions
-import { changePage } from '../actions/pageActions';
+import { changePage } from '../actions/authActions';
 // Import Icons
 import { GiFlatPawPrint, GiPeaks } from 'react-icons/gi';
 import { FaLandmark, FaMountain } from 'react-icons/fa';
@@ -14,7 +14,7 @@ import Navlink from './navlink';
 
 const Nav = () => {
   // Get the nav button to highlight from the current page
-  const page = useSelector( state => state.page.currentPage );
+  const page = useSelector( state => state.auth.currentPage );
 
   // Compose Classes
   const navCs = "z-10 absolute top-0 sm:left-0 text-center sm:text-left \

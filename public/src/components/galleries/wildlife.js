@@ -1,22 +1,22 @@
 import ImageGallery from 'react-image-gallery';
-import image1 from '../images/wildlife/buffalo1.jpg';
-import image1_thumb from '../images/wildlife/buffalo1_thumbnail.jpg';
-import image2 from '../images/wildlife/redWingBlackBird1.jpg';
-import image2_thumb from '../images/wildlife/redWingBlackBird1_thumbnail.jpg';
-import image3 from '../images/wildlife/heron1.jpg';
-import image3_thumb from '../images/wildlife/heron1_thumbnail.jpg';
-import image4 from '../images/wildlife/bee1.jpg';
-import image4_thumb from '../images/wildlife/bee1_thumbnail.jpg';
-import image5 from '../images/wildlife/rubberBoa1.jpg';
-import image5_thumb from '../images/wildlife/rubberBoa1_thumbnail.jpg';
-import image6 from '../images/wildlife/heron2.jpg';
-import image6_thumb from '../images/wildlife/heron2_thumbnail.jpg';
-import image7 from '../images/wildlife/woodpecker1.jpg';
-import image7_thumb from '../images/wildlife/woodpecker1_thumbnail.jpg';
-import image8 from '../images/wildlife/dragonfly1.jpg';
-import image8_thumb from '../images/wildlife/dragonfly1_thumbnail.jpg';
-import image9 from '../images/wildlife/bluejay1.jpg';
-import image9_thumb from '../images/wildlife/bluejay1_thumbnail.jpg';
+import image1 from '../../images/wildlife/buffalo1.jpg';
+import image1_thumb from '../../images/wildlife/buffalo1_thumbnail.jpg';
+import image2 from '../../images/wildlife/redWingBlackBird1.jpg';
+import image2_thumb from '../../images/wildlife/redWingBlackBird1_thumbnail.jpg';
+import image3 from '../../images/wildlife/heron1.jpg';
+import image3_thumb from '../../images/wildlife/heron1_thumbnail.jpg';
+import image4 from '../../images/wildlife/bee1.jpg';
+import image4_thumb from '../../images/wildlife/bee1_thumbnail.jpg';
+import image5 from '../../images/wildlife/rubberBoa1.jpg';
+import image5_thumb from '../../images/wildlife/rubberBoa1_thumbnail.jpg';
+import image6 from '../../images/wildlife/heron2.jpg';
+import image6_thumb from '../../images/wildlife/heron2_thumbnail.jpg';
+import image7 from '../../images/wildlife/woodpecker1.jpg';
+import image7_thumb from '../../images/wildlife/woodpecker1_thumbnail.jpg';
+import image8 from '../../images/wildlife/dragonfly1.jpg';
+import image8_thumb from '../../images/wildlife/dragonfly1_thumbnail.jpg';
+import image9 from '../../images/wildlife/bluejay1.jpg';
+import image9_thumb from '../../images/wildlife/bluejay1_thumbnail.jpg';
 
 // So, i think i actually need to store the images on the server,
 // and request them in the formate below,
@@ -52,10 +52,9 @@ const Wildlife = () => {
   return (
     <main class="pt-44 pb-10 pl-0 sm:pl-24 sm:pt-24 sm:pr-10">
       <div className={containerCs}>
-        <div id="intro" class="pr-4 mb-2 sm:mb-0 font-mont">
-          <ImageGallery thumbnailPosition={window.innerWidth < 480 ? 'bottom' : 'left' }
-                        items={images} />
-        </div>
+        <ImageGallery thumbnailPosition={window.innerWidth < 480 ? 'bottom' : 'left' }
+                        items={images}
+                        additionalClass="mx-auto w-full" />
       </div>
     </main>
   )

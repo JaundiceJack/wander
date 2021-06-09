@@ -1,6 +1,15 @@
-
+import ImageGallery from 'react-image-gallery';
+import image1 from '../../images/history/buddha1.jpg';
+import image1_thumb from '../../images/history/buddha1t.jpg';
+import image2 from '../../images/history/buddha2.jpg';
+import image2_thumb from '../../images/history/buddha2t.jpg';
 
 const History = () => {
+  const images = [
+    { original: image1, thumbnail: image1_thumb },
+    { original: image2, thumbnail: image2_thumb },
+  ];
+
   // Compose Classes
   const containerCs = "mx-5 shadow-xl border-l border-blue-200 \
     bg-gradient-to-br from-blue-200 to-transparent \
@@ -13,11 +22,11 @@ const History = () => {
     transform duration-75 hover:scale-105";
 
   return (
-    <main class="flex justify-center pt-44">
+    <main class="pt-44 pb-10 pl-0 sm:pl-24 sm:pt-24 sm:pr-10">
       <div className={containerCs}>
-        <div id="intro" class="pr-4 mb-2 sm:mb-0 font-mont">
-          <h1 className={headerCs}>Coming Soon!</h1>
-        </div>
+        <ImageGallery thumbnailPosition={window.innerWidth < 480 ? 'bottom' : 'left' }
+                        items={images}
+                        additionalClass="mx-auto w-full" />
       </div>
     </main>
   )
