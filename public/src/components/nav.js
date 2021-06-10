@@ -26,8 +26,7 @@ const Nav = () => {
     transform duration-75 hover:scale-105 flex";
   const logoTextCs = "ml-1 font-bold font-mont text-xl bg-clip-text \
     text-transparent bg-gradient-to-br from-yellow-500 via-blue-200";
-  const navIconCs = "text-yellow-500 shadow-xl \
-    group-hover:opacity-0 transition duration-300 ";
+  const navIconCs = "text-yellow-400 group-hover:opacity-0 transition duration-300 ";
 
 
   // Change the highlighted page icon
@@ -55,24 +54,24 @@ const Nav = () => {
                  onClick={() => changeActive('wildlife')}
                  positionClasses={ page === 'wildlife' ?
                  "border-3 border-green-400 sm:top-0.5 sm:left-24" :
-                 "border sm:top-0.5 sm:left-24"}
+                 "border border-gray-300 sm:top-0.5 sm:left-24"}
                  imageClass="bg-image-animal" />
+        <Navlink target="/landscape"
+                 text="Landscape"
+                 icon=<GiPeaks className={navIconCs+" text-3xl"} />
+                 onClick={() => changeActive('landscape')}
+                 positionClasses={ page === 'landscape' ?
+                 "border-3 border-green-400 sm:mt-0.5 sm:ml-0.5 sm:top-12 sm:left-12" :
+                 "border border-gray-300 sm:mt-0.5 sm:ml-0.5 sm:top-12 sm:left-12"}
+                 imageClass="bg-image-mountain" />
         <Navlink target="/history"
                  text="History"
                  icon=<FaLandmark className={navIconCs+" text-2xl"} />
                  onClick={() => changeActive('history')}
                  positionClasses={ page === 'history' ?
-                 "border-3 border-green-400 sm:mt-0.5 sm:ml-0.5 sm:top-12 sm:left-12" :
-                 "border sm:mt-0.5 sm:ml-0.5 sm:top-12 sm:left-12"}
-                 imageClass="bg-image-ruin" />
-        <Navlink target="/landscape"
-                 text="Landscape"
-                 icon=<GiPeaks className={navIconCs+" text-4xl"} />
-                 onClick={() => changeActive('landscape')}
-                 positionClasses={ page === 'landscape' ?
                  "border-3 border-green-400 sm:top-24 sm:left-0.5" :
-                 "border sm:top-24 sm:left-0.5"}
-                 imageClass="bg-image-mountain" />
+                 "border border-gray-300 sm:top-24 sm:left-0.5"}
+                 imageClass="bg-image-ruin" />
       </div>
   </nav>
   )

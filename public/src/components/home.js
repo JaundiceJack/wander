@@ -16,7 +16,7 @@ const Home = () => {
     bg-gradient-to-r sm:bg-gradient-to-b \
     from-transparent via-yellow-300 opacity-60 to-transparent"
   const linkCs = "text-xl bg-clip-text text-transparent bg-gradient-to-r from-yellow-100 via-white to-blue-100 font-semibold \
-    transform duration-75 hover:scale-105";
+    transform duration-200 hover:scale-105";
 
   // Change the highlighted page icon
   const dispatch = useDispatch();
