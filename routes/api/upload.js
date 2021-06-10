@@ -5,6 +5,7 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 
 // Set up multer for photo storage
+/*
 const crypto = require('crypto');
 const multer  = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
@@ -38,6 +39,6 @@ const photoUploads = upload.fields([
 router.post('/', auth, photoUploads, (req, res) => {
   res.json("ok");
 })
-
+*/
 
 module.exports = router;
