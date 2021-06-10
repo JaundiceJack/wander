@@ -11,11 +11,11 @@ const Home = () => {
   // Compose Classes
   const containerCs = "mx-5 mb-16 \
     p-5 flex flex-col sm:flex-row rounded-xl rounded-tl-lg"
-  const headerCs = "font-bold bg-clip-text text-transparent bg-gradient-to-br from-yellow-500 to-yellow-300 leading-10"
+  const headerCs = "font-bold bg-clip-text text-transparent bg-gradient-to-r sm:bg-gradient-to-l from-yellow-100 via-white to-blue-100 leading-10"
   const dividerCs = "h-px w-full sm:w-px sm:h-32 mb-1 sm:mb-0 \
     bg-gradient-to-r sm:bg-gradient-to-b \
-    from-transparent via-yellow-500 to-transparent"
-  const linkCs = "text-xl bg-clip-text text-transparent bg-gradient-to-br from-yellow-400 via-yellow-300 to-yellow-400 font-semibold \
+    from-transparent via-yellow-300 opacity-60 to-transparent"
+  const linkCs = "text-xl bg-clip-text text-transparent bg-gradient-to-r from-yellow-100 via-white to-blue-100 font-semibold \
     transform duration-75 hover:scale-105";
 
   // Change the highlighted page icon

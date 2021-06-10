@@ -43,7 +43,7 @@ const Nav = () => {
               to="/home"
               className="bg-image-field col-span-3 sm:col-span-1 h-12 sm:h-24 \
                 w-full sm:w-24 clip-it sm:rounded-b-none rounded-b-lg \
-                transform duration-75 hover:scale-105 flex">
+                transform duration-300 hover:scale-110 flex">
           <p className="mx-auto mt-0 sm:ml-2 sm:mt-5 self-center sm:self-start \
             text-flip font-bold font-mont text-xl bg-clip-text text-transparent \
             bg-gradient-to-tl from-blue-300 via-yellow-200 to-blue-300">WFW</p>
@@ -53,23 +53,26 @@ const Nav = () => {
                  text="Wildlife"
                  icon=<GiFlatPawPrint className={navIconCs+" text-3xl"} />
                  onClick={() => changeActive('wildlife')}
-                 extraClasses={ page === 'wildlife' ?
-                 "border-2 border-green-500 bg-image-animal sm:top-0.5 sm:left-24" :
-                 "bg-image-animal sm:top-0.5 sm:left-24"} />
+                 positionClasses={ page === 'wildlife' ?
+                 "border-3 border-green-400 sm:top-0.5 sm:left-24" :
+                 "border sm:top-0.5 sm:left-24"}
+                 imageClass="bg-image-animal" />
         <Navlink target="/history"
                  text="History"
                  icon=<FaLandmark className={navIconCs+" text-2xl"} />
                  onClick={() => changeActive('history')}
-                 extraClasses={ page === 'history' ?
-                 "border-2 border-green-500 bg-image-ruin sm:mt-0.5 sm:ml-0.5 sm:top-12 sm:left-12" :
-                 "bg-image-ruin sm:mt-0.5 sm:ml-0.5 sm:top-12 sm:left-12"} />
+                 positionClasses={ page === 'history' ?
+                 "border-3 border-green-400 sm:mt-0.5 sm:ml-0.5 sm:top-12 sm:left-12" :
+                 "border sm:mt-0.5 sm:ml-0.5 sm:top-12 sm:left-12"}
+                 imageClass="bg-image-ruin" />
         <Navlink target="/landscape"
                  text="Landscape"
                  icon=<GiPeaks className={navIconCs+" text-4xl"} />
                  onClick={() => changeActive('landscape')}
-                 extraClasses={ page === 'landscape' ?
-                 "border-2 border-green-500 bg-image-mountain sm:top-24 sm:left-0.5" :
-                 "bg-image-mountain sm:top-24 sm:left-0.5"} />
+                 positionClasses={ page === 'landscape' ?
+                 "border-3 border-green-400 sm:top-24 sm:left-0.5" :
+                 "border sm:top-24 sm:left-0.5"}
+                 imageClass="bg-image-mountain" />
       </div>
   </nav>
   )

@@ -53,7 +53,7 @@ const Login = () => {
     // If there were entry errors, display them for 5 seconds
     else { !updateTimer.current && setUpdate(); }
   }
-  const changeActive = nextPage => { dispatch(changePage(nextPage)) }
+
   const errorMsgClasses =
     " px-3 py-2 mb-2 font-semibold text-white rounded-lg " +
     " bg-gradient-to-tl from-transparent via-red-700 to-gray-900 fadeError";

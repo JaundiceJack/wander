@@ -9,6 +9,9 @@ module.exports = {
         '152': '38rem'
       }
     },
+    borderWidth: {
+      '3': '3px',
+    }
   },
   variants: {
     extend: {},
