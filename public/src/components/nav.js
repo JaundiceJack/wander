@@ -69,8 +69,8 @@ const Nav = () => {
                  icon=<FaLandmark className={navIconCs+" text-2xl"} />
                  onClick={() => changeActive('history')}
                  positionClasses={ page === 'history' ?
-                 "border-3 border-green-400 sm:top-24 sm:left-0.5" :
-                 "border border-gray-300 sm:top-24 sm:left-0.5"}
+                 "border-3 border-green-400 sm:mt-1 sm:top-24 sm:left-0.5" :
+                 "border border-gray-300 sm:mt-1 sm:top-24 sm:left-0.5"}
                  imageClass="bg-image-ruin" />
       </div>
   </nav>

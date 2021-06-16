@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // Set up a nav link that routes to the target with the provided text and icon
 const Navlink = ({ target, text, icon, positionClasses, imageClass, onClick }) => {
-  const navlinkCs = " sm:absolute z-10 h-14 w-20 sm:w-14  \
+  const navlinkCs = " sm:absolute z-10 h-12 w-20 sm:w-12  \
     transform duration-300 nav-resize \
     flex items-center justify-center cursor-pointer group rounded-xl sm:rounded-full ";
   const navTextCs = " font-mont font-bold bg-clip-text text-transparent  \

@@ -39,7 +39,7 @@
 .text-shadow { text-shadow: -1px 0px 0px #567; }
 .text-flip { transform: rotate(-45deg); }
 .nav-resize:hover { width: 7rem; }
-.nav-resize:hover > .nav-image { filter: blur(1px) drop-shadow(0 0 2px #222); }
+.nav-resize:hover > .nav-image { filter: blur(0.75px) drop-shadow(0 0 2px #222); }
 .clip-it {
   -webkit-clip-path: polygon(50% 0%, 100% 0%, 0% 100%, 0% 50%);
   clip-path: polygon(50% 0%, 100% 0%, 0% 100%, 0% 50%);

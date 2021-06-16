@@ -5,7 +5,6 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 
 // Set up multer for photo storage
-/*
 const crypto = require('crypto');
 const multer  = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
@@ -28,8 +27,8 @@ const storage = new GridFsStorage({
 });
 const upload = multer({ storage });
 
-// Route:  DELETE api/assets
-// Desc:   delete an asset
+// Route:  POST api/photos
+// Desc:   Store the uploaded photos
 // Access: private
 const photoUploads = upload.fields([
   {name: 'wildlife', maxCount: 30},
@@ -38,7 +37,28 @@ const photoUploads = upload.fields([
 ]);
 router.post('/', auth, photoUploads, (req, res) => {
   res.json("ok");
+});
+
+// Route: GET api/photos/wildlife
+// Desc:  Stream wildlife photos to the client
+// Access: public
+router.get('/wildlife', (req, res) => {
+
 })
-*/
+
+// Route: GET api/photos/landscape
+// Desc:  Stream landscape photos to the client
+// Access: public
+router.get('/landscape', (req, res) => {
+
+})
+
+// Route: GET api/photos/history
+// Desc:  Stream history photos to the client
+// Access: public
+router.get('/history', (req, res) => {
+
+})
+
 
 module.exports = router;
