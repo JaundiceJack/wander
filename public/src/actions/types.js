@@ -10,3 +10,11 @@ export const LOGIN_FAIL           = "LOGIN_FAIL";
 export const LOGOUT_SUCCESS       = "LOGOUT_SUCCESS";
 export const REGISTER_SUCCESS     = "REGISTER_SUCCESS";
 export const REGISTER_FAIL        = "REGISTER_FAIL";
+
+export const GET_WILDLIFE = "GET_WILDLIFE";
+export const LOADING_WILDLIFE = "LOADING_WILDLIFE";
+export const GET_LANDSCAPE = "GET_LANDSCAPE";
+export const LOADING_LANDSCAPE = "LOADING_LANDSCAPE";
+export const GET_HISTORY = "GET_HISTORY";
+export const LOADING_HISTORY = "LOADING_HISTORY";
+export const UPLOAD_PHOTOS = "UPLOAD_PHOTOS";
