@@ -1,24 +1,64 @@
-import { GET_ERRORS, CLEAR_ERRORS } from '../actions/types.js';
+import {
+  GET_WILDLIFE,
+  LOADING_WILDLIFE,
+  GET_LANDSCAPE,
+  LOADING_LANDSCAPE,
+  GET_HISTORY,
+  LOADING_HISTORY,
+  UPLOAD_PHOTOS,
+  UPLOAD_SUCCESS } from '../actions/types.js';
 
 const initialState = {
-  msg: {},
-  status: null,
-  id:  null,
+  wildlife: [],
+  wildlifeLoading: false,
+  landscape: [],
+  landscapeLoading: false,
+  history: [],
+  historyLoading: false
 }
 
 const photoReducer = (state = initialState, action) => {
   switch(action.type) {
-    case GET_ERRORS:
+    case LOADING_WILDLIFE:
       return {
-        msg:    action.payload.msg,
-        status: action.payload.status,
-        id:     action.payload.id
+        ...state,
+        wildlifeLoading: true
       }
-    case CLEAR_ERRORS:
+    case GET_WILDLIFE:
       return {
-        msg:    {},
-        status: null,
-        id:     null
+        ...state,
+        wildlifeLoading: false,
+        wildlife: action.payload,
+      }
+    case LOADING_LANDSCAPE:
+      return {
+        ...state,
+        landscapeLoading: true
+      }
+    case GET_LANDSCAPE:
+      return {
+        ...state,
+        landscapeLoading: false,
+        landscape: action.payload,
+      }
+    case LOADING_HISTORY:
+      return {
+        ...state,
+        historyLoading: true
+      }
+    case GET_HISTORY:
+      return {
+        ...state,
+        historyLoading: false,
+        history: action.payload,
+      }
+    case UPLOAD_PHOTOS:
+      return {
+        ...state
+      }
+    case UPLOAD_SUCCESS:
+      return {
+        ...state
       }
     default:
       return state;

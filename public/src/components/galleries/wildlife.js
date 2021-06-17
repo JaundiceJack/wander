@@ -1,4 +1,14 @@
+// Import basics
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+// Import an image gallery api
 import ImageGallery from 'react-image-gallery';
+// Import server actions
+import { getWildlife } from '../../actions/photoActions';
+
+
+
 import image1 from '../../images/wildlife/buffalo1.jpg';
 import image1_thumb from '../../images/wildlife/buffalo1_thumbnail.jpg';
 import image2 from '../../images/wildlife/redWingBlackBird1.jpg';
@@ -19,13 +29,25 @@ import image9 from '../../images/wildlife/bluejay1.jpg';
 import image9_thumb from '../../images/wildlife/bluejay1_thumbnail.jpg';
 
 // So, i think i actually need to store the images on the server,
-// and request them in the formate below,
+// and request them in the format below,
 // for one, storing them all on the client would be bad,
 // and there seems to be no automatic way.
 // can mongo store images?
 
 
 const Wildlife = () => {
+  const wildlife = useSelector( state => state.photos.wildlife );
+  const updateTimer = useRef(null);
+  const dispatch = useDispatch();
+  const setUpdate = () => {
+    dispatch(getWildlife());
+    updateTimer.current = setTimeout(() => { updateTimer.current = null }, 1000);
+  }
+  useEffect(() => {
+    !updateTimer.current && setUpdate() }, [wildlife, dispatch]);
+  useEffect(() => { return () => {
+    updateTimer.current && clearTimeout(updateTimer.current) } }, []);
+
   const images = [
     { original: image1, thumbnail: image1_thumb },
     { original: image2, thumbnail: image2_thumb },
@@ -53,7 +75,7 @@ const Wildlife = () => {
     <main class="pt-44 pb-10 pl-0 sm:pl-24 sm:pt-24 sm:pr-10">
       <div className={containerCs}>
         <ImageGallery thumbnailPosition={window.innerWidth < 480 ? 'bottom' : 'left' }
-                        items={images}
+                        items={wildlife}
                         additionalClass="mx-auto w-full" />
       </div>
     </main>

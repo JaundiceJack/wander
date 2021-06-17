@@ -43,21 +43,21 @@ router.post('/', auth, photoUploads, (req, res) => {
 // Desc:  Stream wildlife photos to the client
 // Access: public
 router.get('/wildlife', (req, res) => {
-
+  res.json("ok");
 })
 
 // Route: GET api/photos/landscape
 // Desc:  Stream landscape photos to the client
 // Access: public
 router.get('/landscape', (req, res) => {
-
+  res.json("ok");
 })
 
 // Route: GET api/photos/history
 // Desc:  Stream history photos to the client
 // Access: public
 router.get('/history', (req, res) => {
-
+  res.json("ok");
 })
 
 

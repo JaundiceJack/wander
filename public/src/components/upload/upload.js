@@ -7,14 +7,15 @@ import { Redirect } from 'react-router-dom';
 // Import Components
 import Logout from './logout';
 // Import server actions
-import { loadUser }       from '../../actions/authActions';
+import { loadUser }     from '../../actions/authActions';
+import { uploadPhotos } from '../../actions/photoActions';
 
 const Upload = () => {
   const dividerCs = "h-px w-full sm:w-px sm:h-32 mb-1 sm:mb-0 \
     bg-gradient-to-r sm:bg-gradient-to-b self-center \
     from-transparent via-yellow-500 to-transparent"
 
-  // Check for user authentication each 1000ms
+  // Check for user authentication
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const updateTimer = useRef(null);
   const dispatch = useDispatch();
@@ -27,11 +28,28 @@ const Upload = () => {
   useEffect(() => { return () => {
     updateTimer.current && clearTimeout(updateTimer.current) } }, []);
 
+  // Submit the photos to the server
+  const onSubmit = e => {
+    e.preventDefault();
+
+    // Shove the photos into a form data object
+    const formData = new FormData();
+    const wildFiles = document.getElementById('wildlife').files;
+    formData.append('wildlife', wildFiles);
+    const landFiles = document.getElementById('landscape').files;
+    formData.append('landscape', landFiles);
+    const histFiles = document.getElementById('history').files;
+    formData.append('history', histFiles);
+
+    // Send the new photos to the server/state to be added
+    uploadPhotos(formData);
+  }
+
   return (
     <main className="pt-36 pl-2 pr-2 sm:pr-0 sm:pt-5 sm:pl-10">
       { isAuthenticated ?
         <div className="flex flex-col sm:flex-row">
-          <form className="relative flex flex-col sm:items-start items-center sm:w-136">
+          <form onSubmit={onSubmit} className="relative flex flex-col sm:items-start items-center sm:w-136">
             <h1 className="sm:mr-2 mb-2 font-mont font-bold text-transparent bg-clip-text \
               bg-gradient-to-b from-yellow-400 to-white text-lg self-center sm:self-end">
               Select images to upload: </h1>

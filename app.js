@@ -21,7 +21,7 @@ mongoose
 // Define routes
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/users', require('./routes/api/users'));
-app.use('/api/upload', require('./routes/api/upload'))
+app.use('/api/photos', require('./routes/api/photos'))
 app.get('/ping', (req, res) => { return res.send('pong'); });
 
 // Serve static assets if in production
