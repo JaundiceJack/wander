@@ -40,7 +40,7 @@ const Wildlife = () => {
   const updateTimer = useRef(null);
   const dispatch = useDispatch();
   const setUpdate = () => {
-    dispatch(getWildlife());
+    // dispatch(getWildlife());
     updateTimer.current = setTimeout(() => { updateTimer.current = null }, 1000);
   }
   useEffect(() => {
@@ -75,7 +75,7 @@ const Wildlife = () => {
     <main class="pt-44 pb-10 pl-0 sm:pl-24 sm:pt-24 sm:pr-10">
       <div className={containerCs}>
         <ImageGallery thumbnailPosition={window.innerWidth < 480 ? 'bottom' : 'left' }
-                        items={wildlife}
+                        items={images}
                         additionalClass="mx-auto w-full" />
       </div>
     </main>

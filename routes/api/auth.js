@@ -16,6 +16,7 @@ const jwtk = require('../../config/keys').jwtSecret;
 // Desc:   authenticate the user for logging in
 // Access: public
 router.post('/', (req, res) => {
+  console.log("Logging in... ");
   // Validate the entries
   const { username, password } = req.body;
   if (!username || !password)
