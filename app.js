@@ -9,15 +9,6 @@ const app = express();
 // Body parser middleware
 app.use(express.json());
 
-// Get the mongo connection key
-const db = require('./config/keys').mongoURI;
-
-// Connect to MongoDB
-mongoose
-.connect(db, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
-.then(() => console.log("MongoDB Connected!"))
-.catch(err => console.log(err));
-
 // Define routes
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/users', require('./routes/api/users'));

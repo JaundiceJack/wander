@@ -1,21 +1,23 @@
 // Import basics
-import React, { useState, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // Import actions
-import { changePage } from '../actions/authActions';
+import { changePage }   from '../actions/authActions';
+import { getFileNames } from '../actions/photoActions';
 // Import router stuff
 import { Link } from 'react-router-dom';
 
 const Home = () => {
   // Compose Classes
   const containerCs = "mx-5 mb-16 flex flex-col sm:flex-row rounded-xl rounded-tl-lg"
-  const headerCs = "font-bold bg-clip-text text-transparent bg-gradient-to-r sm:bg-gradient-to-l from-yellow-100 via-white to-blue-100 leading-10"
-  const dividerCs = "h-px w-full sm:w-px sm:h-32 mb-1 sm:mb-0 \
-    bg-gradient-to-r sm:bg-gradient-to-b \
-    from-transparent via-yellow-300 opacity-60 to-transparent"
-  const linkCs = "text-xl bg-clip-text text-transparent bg-gradient-to-r from-yellow-100 via-white to-blue-100 font-semibold \
-    transform duration-200 hover:scale-105";
+  const headerCs = "font-bold bg-clip-text text-transparent bg-gradient-to-r" +
+    " sm:bg-gradient-to-l from-yellow-100 via-white to-blue-100 leading-10"
+  const dividerCs = "h-px w-full sm:w-px sm:h-32 mb-1 sm:mb-0" +
+    " bg-gradient-to-r sm:bg-gradient-to-b" +
+    " from-transparent via-yellow-300 opacity-60 to-transparent"
+  const linkCs = "text-xl bg-clip-text text-transparent bg-gradient-to-r" +
+    " from-yellow-100 via-white to-blue-100 font-semibold" +
+    " transform duration-200 hover:scale-105";
 
   // Change the highlighted page icon
   const dispatch = useDispatch();

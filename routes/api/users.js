@@ -1,4 +1,5 @@
 // Import Libraries
+const { connection } = require('../../mongo');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -6,7 +7,8 @@ const jwt = require('jsonwebtoken');
 // Import route access protection
 const auth = require('../../middleware/auth.js');
 // Import the User Model
-const User = require('../../models/User');
+const userSchema = require('../../models/User');
+const User = connection.model('User', userSchema);
 
 // Grab the json web token key
 const jwtk = require('../../config/keys').jwtSecret;

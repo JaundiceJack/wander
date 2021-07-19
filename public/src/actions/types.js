@@ -11,7 +11,9 @@ export const LOGOUT_SUCCESS       = "LOGOUT_SUCCESS";
 export const REGISTER_SUCCESS     = "REGISTER_SUCCESS";
 export const REGISTER_FAIL        = "REGISTER_FAIL";
 
+export const GET_NAMES = "GET_NAMES";
 export const GET_WILDLIFE = "GET_WILDLIFE";
+export const CLEAR_WILDLIFE = "CLEAR_WILDLIFE";
 export const LOADING_WILDLIFE = "LOADING_WILDLIFE";
 export const GET_LANDSCAPE = "GET_LANDSCAPE";
 export const LOADING_LANDSCAPE = "LOADING_LANDSCAPE";

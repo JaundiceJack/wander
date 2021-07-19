@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // Import an image gallery api
 import ImageGallery from 'react-image-gallery';
 // Import server actions
-import { getWildlife } from '../../actions/photoActions';
+import { getImages } from '../../actions/photoActions';
 
 
 
@@ -37,10 +37,12 @@ import image9_thumb from '../../images/wildlife/bluejay1_thumbnail.jpg';
 
 const Wildlife = () => {
   const wildlife = useSelector( state => state.photos.wildlife );
+  const errorMsg = useSelector( state => state.error.msg.msg );
+
   const updateTimer = useRef(null);
   const dispatch = useDispatch();
   const setUpdate = () => {
-    // dispatch(getWildlife());
+    dispatch(getImages('wildlife'));
     updateTimer.current = setTimeout(() => { updateTimer.current = null }, 1000);
   }
   useEffect(() => {
@@ -48,17 +50,7 @@ const Wildlife = () => {
   useEffect(() => { return () => {
     updateTimer.current && clearTimeout(updateTimer.current) } }, []);
 
-  const images = [
-    { original: image1, thumbnail: image1_thumb },
-    { original: image2, thumbnail: image2_thumb },
-    { original: image3, thumbnail: image3_thumb },
-    { original: image4, thumbnail: image4_thumb },
-    { original: image5, thumbnail: image5_thumb },
-    { original: image6, thumbnail: image6_thumb },
-    { original: image7, thumbnail: image7_thumb },
-    { original: image8, thumbnail: image8_thumb },
-    { original: image9, thumbnail: image9_thumb },
-  ];
+  console.log(wildlife)
 
   // Compose Classes
   const containerCs = "border-l border-blue-200 shadow-lg \
@@ -70,14 +62,19 @@ const Wildlife = () => {
     from-transparent via-yellow-600 to-transparent"
   const linkCs = "text-shadow text-xl text-yellow-400 font-semibold \
     transform duration-75 hover:scale-105";
+  const errorMsgClasses =
+    " px-3 py-2 mb-2 font-semibold text-white rounded-lg " +
+    " bg-gradient-to-tl from-transparent via-red-700 to-gray-900 fadeError";
 
   return (
     <main class="pt-44 pb-10 pl-0 sm:pl-24 sm:pt-24 sm:pr-10">
       <div className={containerCs}>
         <ImageGallery thumbnailPosition={window.innerWidth < 480 ? 'bottom' : 'left' }
-                        items={images}
-                        additionalClass="mx-auto w-full" />
+                        items={wildlife}
+                        additionalClass="mx-auto w-full"
+                        lazyLoad='true' />
       </div>
+      { errorMsg && <div className={errorMsgClasses}> {errorMsg} </div> }
     </main>
   )
 }
