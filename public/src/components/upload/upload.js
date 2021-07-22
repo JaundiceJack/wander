@@ -36,10 +36,16 @@ const Upload = () => {
     // Shove the photos into a form data object
     const formData = new FormData();
     const wildFiles = document.getElementById('wildlife').files;
+    const landFiles = document.getElementById('landscape').files;
+    const histFiles = document.getElementById('history').files;
+    for (let i = 0; i < wildFiles.length; i++) {
+      formData.append('wildlife', wildFiles[i]); }
+    for (let i = 0; i < landFiles.length; i++) {
+      formData.append('landscape', landFiles[i]); }
+    for (let i = 0; i < histFiles.length; i++) {
+      formData.append('history', histFiles[i]); }
 
-    formData.append('wildlife', wildFiles[0]);
-    console.log(wildFiles[0]);
-    console.log("Submitting form:", formData.get('wildlife'));
+    console.log(wildFiles);
     // Send the new photos to the server/state to be added
     dispatch(uploadPhotos(formData));
   }
@@ -67,7 +73,6 @@ const Upload = () => {
                       bg-clip-text bg-gradient-to-b from-yellow-400 to-white "
                       multiple />
             </div>
-            {/*
             <div className="grid grid-cols-1 sm:grid-cols-2">
               <label for="landscape"
                      className="font-mont font-bold text-transparent text-center sm:text-right mr-2 bg-clip-text \
@@ -90,7 +95,6 @@ const Upload = () => {
                       bg-clip-text bg-gradient-to-b from-yellow-400 to-white "
                      multiple />
             </div>
-            */}
             <button type="submit"
                     className="mb-4 mx-3 sm:mb-0 p-1 w-32 font-mont font-semibold rounded text-green-400 \
                     bg-gradient-to-b from-gray-100 via-gray-200 to-gray-100 self-center sm:self-end"

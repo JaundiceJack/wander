@@ -1,8 +1,6 @@
 import {
-  GET_NAMES,
   GET_WILDLIFE,
   LOADING_WILDLIFE,
-  CLEAR_WILDLIFE,
   GET_LANDSCAPE,
   LOADING_LANDSCAPE,
   GET_HISTORY,
@@ -11,9 +9,6 @@ import {
   UPLOAD_SUCCESS } from '../actions/types.js';
 
 const initialState = {
-  wildlifeNames: [],
-  landscapeNames: [],
-  historyNames: [],
   wildlife: [],
   wildlifeLoading: false,
   landscape: [],
@@ -24,11 +19,6 @@ const initialState = {
 
 const photoReducer = (state = initialState, action) => {
   switch(action.type) {
-    case GET_NAMES:
-      return {
-        ...state,
-        wildlifeNames: action.payload
-      }
     case LOADING_WILDLIFE:
       return {
         ...state,
@@ -39,11 +29,6 @@ const photoReducer = (state = initialState, action) => {
         ...state,
         wildlifeLoading: false,
         wildlife: action.payload,
-      }
-    case CLEAR_WILDLIFE:
-      return {
-        ...state,
-        wildlife: []
       }
     case LOADING_LANDSCAPE:
       return {
