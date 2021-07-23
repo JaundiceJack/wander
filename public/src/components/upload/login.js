@@ -1,11 +1,10 @@
 // Import basics
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 // Import router stuff
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 // Import server actions
-import { login, changePage }       from '../../actions/authActions';
+import { login }       from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
 
 const Login = () => {
@@ -19,13 +18,15 @@ const Login = () => {
   // Clear the badEntries after the timer runs out
   const dispatch = useDispatch();
   const updateTimer = useRef(null);
-  const setUpdate = () => { updateTimer.current = setTimeout(() => {
-    dispatch(clearErrors());
-    setBadEntries([]);
-    updateTimer.current = null; }, 5000);
-  }
   // Update errors from the server
-  useEffect(() => { !updateTimer.current && setUpdate() }, [errorMsg]);
+  useEffect(() => {
+    if (!updateTimer.current) {
+      updateTimer.current = setTimeout(() => {
+      dispatch(clearErrors());
+      setBadEntries([]);
+      updateTimer.current = null; }, 5000);
+    }
+  }, [errorMsg, dispatch]);
   // Clear the timer on unmount
   useEffect(() => { return () => {
     updateTimer.current && clearTimeout(updateTimer.current); }; }, []);
@@ -51,7 +52,14 @@ const Login = () => {
       dispatch(login(currentUser));
     }
     // If there were entry errors, display them for 5 seconds
-    else { !updateTimer.current && setUpdate(); }
+    else {
+      if (!updateTimer.current) {
+        updateTimer.current = setTimeout(() => {
+        dispatch(clearErrors());
+        setBadEntries([]);
+        updateTimer.current = null; }, 5000);
+      }
+    }
   }
 
   const errorMsgClasses =

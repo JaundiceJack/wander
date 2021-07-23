@@ -9,7 +9,9 @@ const db = require('./config/keys').mongoURI;
 // Connect to MongoDB
 const connection = mongoose.createConnection(db, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
 });
 
 // Set up multer-gridfs for photo storage
@@ -25,7 +27,7 @@ const storage = new GridFsStorage({
         const fileInfo = {
           filename: filename,
           bucketName: 'uploads',
-          metadata: category 
+          metadata: category
         };
         resolve(fileInfo);
       });

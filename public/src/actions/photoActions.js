@@ -1,11 +1,8 @@
 // Import action types
 import {
-  GET_NAMES,
   GET_WILDLIFE,
-  CLEAR_WILDLIFE,
   GET_LANDSCAPE,
   GET_HISTORY,
-  UPLOAD_PHOTOS,
   UPLOAD_SUCCESS,
   LOADING_WILDLIFE,
   LOADING_LANDSCAPE,
@@ -14,7 +11,7 @@ import {
 // Import axios to handle http requests
 import axios from 'axios';
 // Import returnErrors to register errors
-import { returnErrors, clearErrors } from './errorActions';
+import { returnErrors } from './errorActions';
 // Import the server route
 import server from './route';
 

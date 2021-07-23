@@ -1,5 +1,5 @@
 // Import Libraries
-const { connection } = require('../../mongo');
+const { connection } = require('../../dbSetup');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');

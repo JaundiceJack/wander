@@ -1,12 +1,10 @@
 // Import basics
-import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 // Import actions
 import { changePage } from '../actions/authActions';
 // Import Icons
 import { GiFlatPawPrint, GiPeaks } from 'react-icons/gi';
-import { FaLandmark, FaMountain } from 'react-icons/fa';
+import { FaLandmark } from 'react-icons/fa';
 // Import router stuff
 import { Link } from 'react-router-dom';
 // Import Components
@@ -17,17 +15,7 @@ const Nav = () => {
   const page = useSelector( state => state.auth.currentPage );
 
   // Compose Classes
-  const navCs = "z-10 absolute top-0 sm:left-0 text-center sm:text-left \
-    w-full sm:w-auto px-2 sm:px-0";
-  const containerCs = "relative grid grid-cols-3 sm:grid-cols-2 gap-2 \
-    sm:items-start items-center";
-  const logoCs = "col-span-3 sm:col-span-1 bg-image-field bg-blue-200 \
-    h-20 sm:w-20 rounded-b-xl sm:rounded-br-full \
-    transform duration-75 hover:scale-105 flex";
-  const logoTextCs = "ml-1 font-bold font-mont text-xl bg-clip-text \
-    text-transparent bg-gradient-to-br from-yellow-500 via-blue-200";
-  const navIconCs = "text-yellow-400 group-hover:opacity-0 transition duration-300 ";
-
+  const navIconCs = " text-yellow-400 group-hover:opacity-0 transition duration-300 ";
 
   // Change the highlighted page icon
   const dispatch = useDispatch();

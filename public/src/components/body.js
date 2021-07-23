@@ -1,5 +1,3 @@
-// Import basics
-import PropTypes from 'prop-types';
 //Import Components
 import Nav    from './nav';
 import Routes from './routes';

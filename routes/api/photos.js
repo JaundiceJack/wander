@@ -7,7 +7,7 @@ const Grid = require('gridfs-stream');
 const fs = require('fs');
 
 // Get the db connection and multer upload system
-const { connection, upload } = require('../../mongo');
+const { connection, upload } = require('../../dbSetup');
 
 // Import route access protection
 const auth = require('../../middleware/auth');

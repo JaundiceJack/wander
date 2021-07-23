@@ -1,9 +1,7 @@
 // Import basics
-import React, { useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // Import actions
 import { changePage }   from '../actions/authActions';
-import { getFileNames } from '../actions/photoActions';
 // Import router stuff
 import { Link } from 'react-router-dom';
 

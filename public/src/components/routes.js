@@ -1,5 +1,3 @@
-// Import basics
-import PropTypes from 'prop-types';
 // Import router stuff
 import { Route, Switch } from 'react-router-dom';
 // Import Components

@@ -1,7 +1,6 @@
 // Import basics
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 // Import router stuff
 import { Redirect } from 'react-router-dom';
 // Import Components
@@ -11,21 +10,23 @@ import { loadUser }     from '../../actions/authActions';
 import { uploadPhotos } from '../../actions/photoActions';
 
 const Upload = () => {
-  const dividerCs = "h-px w-full sm:w-px sm:h-32 mb-1 sm:mb-0 \
-    bg-gradient-to-r sm:bg-gradient-to-b self-center \
-    from-transparent via-yellow-500 to-transparent"
+  const dividerCs = "h-px w-full sm:w-px sm:h-32 mb-1 sm:mb-0 " +
+                    " bg-gradient-to-r sm:bg-gradient-to-b self-center " +
+                    " from-transparent via-yellow-500 to-transparent ";
 
   // Check for user authentication
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const errorMsg = useSelector( state => state.error.msg.msg);
   const updateTimer = useRef(null);
   const dispatch = useDispatch();
-  const setUpdate = () => {
-    dispatch(loadUser());
-    updateTimer.current = setTimeout(() => { updateTimer.current = null }, 1000);
-  }
+  // Get the user for authentication
   useEffect(() => {
-    !updateTimer.current && setUpdate() }, [isAuthenticated, dispatch]);
+    if (!updateTimer.current) {
+      dispatch(loadUser());
+      updateTimer.current = setTimeout(() => { updateTimer.current = null }, 1000);
+    }
+  }, [isAuthenticated, dispatch]);
+  // Clear the timer on unmount
   useEffect(() => { return () => {
     updateTimer.current && clearTimeout(updateTimer.current) } }, []);
 

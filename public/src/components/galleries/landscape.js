@@ -1,7 +1,6 @@
 // Import basics
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 // Import an image gallery api
 import ImageGallery from 'react-image-gallery';
 // Import server actions
@@ -15,13 +14,13 @@ const Landscape = () => {
   // Get the images from the server on page load
   const updateTimer = useRef(null);
   const dispatch = useDispatch();
-  const setUpdate = () => {
-    dispatch(getLandscape());
-    updateTimer.current = setTimeout(() => { // Prevent update for 10 seconds
-      updateTimer.current = null }, 10000);
-  }
   useEffect(() => { // Update images when the page loads
-    !updateTimer.current && setUpdate() }, [landscape, dispatch]);
+    if (!updateTimer.current) {
+      dispatch(getLandscape());
+      updateTimer.current = setTimeout(() => { // Prevent update for 10 seconds
+      updateTimer.current = null }, 10000);
+    }
+  }, [landscape, dispatch]);
   useEffect(() => { return () => { // Clear the timer on page unload
     updateTimer.current && clearTimeout(updateTimer.current) } }, []);
 
@@ -29,13 +28,7 @@ const Landscape = () => {
   const containerCs = " border-l border-blue-200 shadow-lg " +
                       " bg-gradient-to-br from-transparent via-blue-200 " +
                       " to-transparent p-5 flex flex-col sm:flex-row " +
-                      " rounded-xl rounded-tl-lg"
-  const headerCs = "font-bold text-shadow text-yellow-500 leading-10"
-  const dividerCs = " h-px w-full sm:w-px sm:h-32 mb-1 sm:mb-0 " +
-                    " bg-gradient-to-r sm:bg-gradient-to-b " +
-                    " from-transparent via-yellow-600 to-transparent ";
-  const linkCs = " text-shadow text-xl text-yellow-400 font-semibold " +
-                 " transform duration-75 hover:scale-105";
+                      " rounded-xl rounded-tl-lg";
   const errorMsgClasses = " px-3 py-2 mb-2 font-semibold text-white rounded-lg " +
                           " bg-gradient-to-tl from-transparent via-red-700 " +
                           " to-gray-900 fadeError ";
