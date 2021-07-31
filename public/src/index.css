@@ -37,7 +37,7 @@
 
 .font-mont { font-family: 'Montserrat Alternates', 'Arial'; }
 .text-shadow { text-shadow: -1px 0px 0px #567; }
-.text-flip { transform: rotate(-45deg); }
+
 .nav-resize:hover { width: 7rem; }
 .nav-resize:hover > .nav-image { filter: blur(0.75px) drop-shadow(0 0 2px #222); }
 .clip-it {
@@ -52,6 +52,5 @@
 }
 @media (max-width: 640px) {
   .clip-it { -webkit-clip-path: none; clip-path: none; }
-  .text-flip { transform: rotate(0deg); }
   .bg-image-field { background-size: cover; background-position: right; }
 }

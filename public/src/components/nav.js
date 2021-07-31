@@ -16,6 +16,12 @@ const Nav = () => {
 
   // Compose Classes
   const navIconCs = " text-yellow-400 group-hover:opacity-0 transition duration-300 ";
+  const logoLinkCs = " bg-image-field col-span-3 sm:col-span-1 h-12 sm:h-24 " +
+  " w-full sm:w-24 clip-it sm:rounded-b-none rounded-b-lg " +
+  " transform duration-300 hover:scale-110 flex ";
+  const logoTextCs = " mx-auto mt-0 sm:ml-2 sm:mt-5 self-center sm:self-start " +
+  " transform -rotate-45 font-bold font-mont text-xl bg-clip-text text-transparent " +
+  " bg-gradient-to-tl from-blue-300 via-yellow-200 to-blue-300 ";
 
   // Change the highlighted page icon
   const dispatch = useDispatch();
@@ -25,15 +31,8 @@ const Nav = () => {
     <nav className="absolute top-0 sm:left-0 w-full sm:w-auto text-center sm:text-left">
       <div className="relative grid grid-cols-3 gap-3 justify-items-center px-2 sm:px-0">
 
-        <Link id="logo"
-              onClick={() => changeActive('home')}
-              to="/home"
-              className="bg-image-field col-span-3 sm:col-span-1 h-12 sm:h-24 \
-                w-full sm:w-24 clip-it sm:rounded-b-none rounded-b-lg \
-                transform duration-300 hover:scale-110 flex">
-          <p className="mx-auto mt-0 sm:ml-2 sm:mt-5 self-center sm:self-start \
-            text-flip font-bold font-mont text-xl bg-clip-text text-transparent \
-            bg-gradient-to-tl from-blue-300 via-yellow-200 to-blue-300">WFW</p>
+        <Link onClick={() => changeActive('home')} to="/home" className={logoLinkCs}>
+          <p className={logoTextCs}>WFW</p>
         </Link>
 
         <Navlink target="/wildlife"
