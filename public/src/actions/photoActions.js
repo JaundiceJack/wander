@@ -29,7 +29,8 @@ export const uploadPhotos = (formData) => (dispatch, getState) => {
     .then(res => {
       // TODO: change the error reducer to a message reducer to display success messages as well
       console.log("Upload success!");
-      dispatch({ type: UPLOAD_SUCCESS, payload: res.data })})
+      dispatch(returnErrors(res.data, res.status));
+      dispatch({ type: UPLOAD_SUCCESS, payload: res.data });})
     .catch(err => { if (err.response)
       console.log("Upload failure!");
       dispatch(returnErrors(err.response.data, err.response.status))});

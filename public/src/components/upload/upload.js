@@ -46,7 +46,6 @@ const Upload = () => {
     for (let i = 0; i < histFiles.length; i++) {
       formData.append('history', histFiles[i]); }
 
-    console.log(wildFiles);
     // Send the new photos to the server/state to be added
     dispatch(uploadPhotos(formData));
   }

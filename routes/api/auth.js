@@ -1,5 +1,5 @@
 // Import Libraries
-const { connection } = require('../../dbSetup');
+const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -10,7 +10,7 @@ const auth = require('../../middleware/auth.js');
 
 // Import the User Model
 const userSchema = require('../../models/User');
-const User = connection.model('User', userSchema);
+const User = mongoose.connection.model('User', userSchema);
 
 // Grab the json web token key
 const jwtk = require('../../config/keys').jwtSecret;
