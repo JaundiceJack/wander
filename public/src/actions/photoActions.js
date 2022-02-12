@@ -1,68 +1,69 @@
 // Import action types
 import {
-  GET_WILDLIFE,
-  GET_LANDSCAPE,
-  GET_HISTORY,
-  UPLOAD_SUCCESS,
-  LOADING_WILDLIFE,
-  LOADING_LANDSCAPE,
-  LOADING_HISTORY
+  WILDLIFE_LIST_REQUEST,  WILDLIFE_LIST_SUCCESS,  WILDLIFE_LIST_FAILURE,
+  LANDSCAPE_LIST_REQUEST, LANDSCAPE_LIST_SUCCESS, LANDSCAPE_LIST_FAILURE,
+  HISTORY_LIST_REQUEST,   HISTORY_LIST_SUCCESS,   HISTORY_LIST_FAILURE,
+  PHOTO_UPLOAD_REQUEST,   PHOTO_UPLOAD_SUCCESS,   PHOTO_UPLOAD_FAILURE,
+  PHOTO_DELETE_REQUEST,   PHOTO_DELETE_SUCCESS,   PHOTO_DELETE_FAILURE,
 } from './types';
 // Import axios to handle http requests
 import axios from 'axios';
 // Import returnErrors to register errors
-import { returnErrors } from './errorActions';
-// Import the server route
-import server from './route';
+import { handleError } from './errorActions.js';
 
-// Upload the photos in the wildlife, landscape, and history form-fields
-export const uploadPhotos = (formData) => (dispatch, getState) => {
-  // Check for the user to authenticate
-  const user = getState().auth.user;
-  if (user._id) {
-    // Set headers and the content type to handle form data
-    const token = getState().auth.token;
-    const config = { headers: {"Content-type": "multipart/form-data"} };
-    if (token) config.headers["x-auth-token"] = token;
-    // Submit a post with the new photos and the json web token
-    axios.post(`${server}/api/photos`, formData, config)
-    .then(res => {
-      // TODO: change the error reducer to a message reducer to display success messages as well
-      console.log("Upload success!");
-      dispatch(returnErrors(res.data, res.status));
-      dispatch({ type: UPLOAD_SUCCESS, payload: res.data });})
-    .catch(err => { if (err.response)
-      console.log("Upload failure!");
-      dispatch(returnErrors(err.response.data, err.response.status))});
-  }
+// Create a config variable to send with routes requiring authorization
+const tokenConfig = getState => {
+  const { user: { user } } = getState();
+  return { headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${user.token}`
+  }};
 }
 
 // Make a basic request header for json data
-const basicConfig = { headers: { "Content-type": "application/json" }};
+const basicConfig = { headers: { "Content-type": "application/json" } };
+
+// Upload the photos in the wildlife, landscape, and history form-fields
+export const uploadPhotos = formData => async (dispatch, getState) => {
+  dispatch({ type: PHOTO_UPLOAD_REQUEST });
+  try {
+    const { data } = await axios.post(`/api/photos`, formData, tokenConfig(getState));
+    dispatch({ type: PHOTO_UPLOAD_SUCCESS, payload: data });
+  } catch (e) { dispatch({ type: PHOTO_UPLOAD_FAILURE, payload: handleError(e) }); };
+}
+
+// Remove the selected photo from the database
+export const deletePhoto = id => async (dispatch, getState) => {
+  dispatch({ type: PHOTO_DELETE_REQUEST });
+  try {
+    const { data } = await axios.delete(`/api/photos/${id}`, tokenConfig(getState));
+    dispatch({ type: PHOTO_DELETE_SUCCESS, payload: data });
+  } catch (e) { dispatch({ type: PHOTO_DELETE_FAILURE, payload: handleError(e) }); };
+}
 
 // Get each wildlife image/thumbnail link and put in in the current state
-export const getWildlife = () => dispatch => {
-  dispatch(setWildlifeLoading());
-  axios.get(`${server}/api/photos/wildlife`, basicConfig)
-  .then(res => { dispatch({type: GET_WILDLIFE, payload: res.data}); })
-  .catch(err => { dispatch(returnErrors(err.response.data, err.response.status)) })
-}
-// Get each landscape image/thumbnail link and put in in the current state
-export const getLandscape = () => dispatch => {
-  dispatch(setLandscapeLoading());
-  axios.get(`${server}/api/photos/landscape`, basicConfig)
-  .then(res => { dispatch({type: GET_LANDSCAPE, payload: res.data}); })
-  .catch(err => { dispatch(returnErrors(err.response.data, err.response.status)) })
-}
-// Get each history image/thumbnail link and put in in the current state
-export const getHistory = () => dispatch => {
-  dispatch(setHistoryLoading());
-  axios.get(`${server}/api/photos/history`, basicConfig)
-  .then(res => { dispatch({type: GET_HISTORY, payload: res.data}); })
-  .catch(err => { dispatch(returnErrors(err.response.data, err.response.status)) })
+export const getWildlife = () => async dispatch => {
+  dispatch({ type: WILDLIFE_LIST_REQUEST });
+  try {
+    const { data } = await axios.get(`/api/photos/wildlife`, basicConfig);
+    dispatch({ type: WILDLIFE_LIST_SUCCESS, payload: data });
+  } catch (e) { dispatch({ type: WILDLIFE_LIST_FAILURE, payload: handleError(e) }); }
 }
 
-// Set the named images to loading for spinner animations & etc.
-export const setWildlifeLoading = () => { return { type: LOADING_WILDLIFE } }
-export const setLandscapeLoading = () => { return { type: LOADING_LANDSCAPE } }
-export const setHistoryLoading = () => { return { type: LOADING_HISTORY } }
+// Get each landscape image/thumbnail link and put in in the current state
+export const getLandscape = () => async dispatch => {
+  dispatch({ type: LANDSCAPE_LIST_REQUEST });
+  try {
+    const { data } = await axios.get(`/api/photos/landscape`, basicConfig);
+    dispatch({ type: LANDSCAPE_LIST_SUCCESS, payload: data });
+  } catch (e) { dispatch({ type: LANDSCAPE_LIST_FAILURE, payload: handleError(e) }); }
+}
+
+// Get each history image/thumbnail link and put in in the current state
+export const getHistory = () => async dispatch => {
+  dispatch({ type: HISTORY_LIST_REQUEST });
+  try {
+    const { data } = await axios.get(`/api/photos/history`, basicConfig);
+    dispatch({ type: HISTORY_LIST_SUCCESS, payload: data });
+  } catch (e) { dispatch({ type: HISTORY_LIST_FAILURE, payload: handleError(e) }); }
+}

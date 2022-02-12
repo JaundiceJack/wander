@@ -1,10 +1,10 @@
-import {combineReducers} from 'redux';
-import authReducer from './authReducer.js';
-import errorReducer from './errorReducer.js';
+import { combineReducers } from 'redux';
+import userReducer  from './userReducer.js';
 import photoReducer from './photoReducer.js';
+import pageReducer  from './pageReducer.js';
 
 export default combineReducers({
-  auth: authReducer,
-  error: errorReducer,
-  photos: photoReducer
+  user:   userReducer,
+  photos: photoReducer,
+  page:   pageReducer,
 })

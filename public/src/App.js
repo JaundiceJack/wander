@@ -1,10 +1,10 @@
 // Import state stuff
 import store from './store';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 // Import routing stuff
 import { BrowserRouter } from 'react-router-dom';
 // Import components
-import Body from './components/body';
+import Body from './components/body.js';
 
 function App() {
   return (

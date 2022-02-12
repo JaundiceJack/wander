@@ -1,38 +1,34 @@
-// Import Libraries
-const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const connect = require('./db/connection.js');
+const { notFound, errorFound } = require('./middleware/errorMW.js')
+dotenv.config();
 
-// Instance the express app
+// Instance the app server and use the internal body parser
 const app = express();
-
-// Body parser middleware
 app.use(express.json());
 
-// Get the mongo connection key and make a default connection
-const db = require('./config/keys').mongoURI;
-mongoose.connect(db, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-})
-.then(() => console.log("Connected to mongoDB!"))
-.catch(err => console.log(err));
+// Instance a mongoDB connection
+connect();
 
 // Define routes
-app.use('/api/auth', require('./routes/api/auth'));
-app.use('/api/users', require('./routes/api/users'));
-app.use('/api/photos', require('./routes/api/photos'))
+app.use('/api/users', require('./routes/paths/users.js'));
+app.use('/api/photos', require('./routes/paths/photos.js'));
 app.get('/ping', (req, res) => { return res.send('pong'); });
+
+// Error handling middleware
+app.use(notFound);
+app.use(errorFound);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('public/build'));
   app.get('/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public', 'build', 'index.html'));
-  })
-}
+  });
+};
 
-// Start the app on the env port or port 5000
+// Start the server on the assigned port
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(port, () => { console.log(`Server started on port ${port}`); });

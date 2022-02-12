@@ -4,10 +4,10 @@ import Routes from './routes';
 
 const Body = () => {
   return (
-    <body className="relative bg-black min-h-screen bg-image-chip">
+    <div className="relative bg-black min-h-screen bg-image-chip">
       <Nav />
       <Routes />
-    </body>
+    </div>
   )
 }
 

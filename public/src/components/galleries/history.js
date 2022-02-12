@@ -1,47 +1,36 @@
 // Import basics
-import React, { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// Import an image gallery api
-import ImageGallery from 'react-image-gallery';
 // Import server actions
-import { getHistory } from '../../actions/photoActions';
+import { getHistory } from '../../actions/photoActions.js';
+// Import Components
+import Gallery from './gallery.js';
+import Spinner from '../misc/spinner.js';
+import Message from '../misc/message.js';
 
 const History = () => {
   // Get the image links and error messages from redux
-  const history = useSelector( state => state.photos.history );
-  const errorMsg = useSelector( state => state.error.msg.msg );
+  const { history, loading, error } = useSelector( state => state.photos );
 
-  // Get the images from the server on page load
-  const updateTimer = useRef(null);
+  // Request the images from the server on page load
+  const timer = useRef(null);
   const dispatch = useDispatch();
-  useEffect(() => { // Update images when the page loads
-    if (!updateTimer.current) {
-      dispatch(getHistory());
-      updateTimer.current = setTimeout(() => { // Prevent update for 10 seconds
-      updateTimer.current = null }, 10000);
+  useEffect(() => {
+    if (!timer.current) {
+      if (history.length === 0 ) dispatch(getHistory());
+      timer.current = setTimeout(() => {
+        timer.current = null;
+      }, 5000);
     }
   }, [history, dispatch]);
-  useEffect(() => { return () => { // Clear the timer on page unload
-    updateTimer.current && clearTimeout(updateTimer.current) } }, []);
-
-  // Compose Classes
-  const containerCs = " border-l border-blue-200 shadow-lg " +
-                      " bg-gradient-to-br from-transparent via-blue-200 " +
-                      " to-transparent p-5 flex flex-col sm:flex-row " +
-                      " rounded-xl rounded-tl-lg";
-  const errorMsgClasses = " px-3 py-2 mb-2 font-semibold text-white rounded-lg " +
-                          " bg-gradient-to-tl from-transparent via-red-700 " +
-                          " to-gray-900 fadeError ";
 
   return (
-    <main class="pt-44 pb-10 pl-0 sm:pl-24 sm:pt-24 sm:pr-10">
-      <div className={containerCs}>
-        <ImageGallery thumbnailPosition={window.innerWidth < 480 ? 'bottom' : 'left' }
-                        items={history}
-                        additionalClass="mx-auto w-full"
-                        lazyLoad='true' />
-      </div>
-      { errorMsg && <div className={errorMsgClasses}> {errorMsg} </div> }
+    <main className="pt-32 sm:pt-20 pb-10 pl-0 sm:pl-24 sm:pr-10">
+      {
+        loading ? <Spinner /> :
+        error ? <Message error={error} /> :
+        <Gallery links={history} />
+      }
     </main>
   )
 }

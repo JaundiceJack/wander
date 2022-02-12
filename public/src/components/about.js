@@ -6,9 +6,9 @@ const About = () => {
   const headerCs = " font-bold text-shadow text-yellow-500 leading-10 ";
 
   return (
-    <main class="flex justify-center pt-44">
+    <main className="flex justify-center pt-44">
       <div className={containerCs}>
-        <div id="intro" class="pr-4 mb-2 sm:mb-0 font-mont">
+        <div id="intro" className="pr-4 mb-2 sm:mb-0 font-mont">
           <h1 className={headerCs}>Welcome to Wayfarer's Wander. Here you'll find my
           best shots of nature and humanity's history.</h1>
         </div>

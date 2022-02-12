@@ -1,32 +1,40 @@
 // Import basics
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// Import router stuff
-import { Redirect } from 'react-router-dom';
 // Import server actions
-import { login }       from '../../actions/authActions';
-import { clearErrors } from '../../actions/errorActions';
+import { login }      from '../../actions/userActions.js';
+import { clearError } from '../../actions/errorActions.js';
+// Import components
+import Message   from '../misc/message.js';
+import Spinner   from '../misc/spinner.js';
+import TextEntry from '../input/textEntry.js';
+import Button    from '../input/button.js';
 
-const Login = () => {
-  const [username,   setUsername]   = useState("");
-  const [password,   setPassword]   = useState("");
+const Login = ({ location, history }) => {
+  const [entries, setEntries] = useState({ email: "", password: "" });
+  const onEntry = e => { setEntries({ ...entries, [e.target.name]: e.target.value }); };
   const [badEntries, setBadEntries] = useState([]);
+
   // Get the authentication state and submission errors
-  const isAuthenticated = useSelector( state => state.auth.isAuthenticated );
-  const errorMsg        = useSelector( state => state.error.msg.msg );
+  const { error, loading, user } = useSelector( state => state.user );
+
+  // Grab any redirect from the history
+  const redirect = location.search ? location.search.split('=')[1] : "/upload";
 
   // Clear the badEntries after the timer runs out
   const dispatch = useDispatch();
   const updateTimer = useRef(null);
-  // Update errors from the server
+  const clearErrors = () => {
+    updateTimer.current = setTimeout(() => {
+    dispatch(clearError('user'));
+    setBadEntries([]);
+    updateTimer.current = null; }, 5000);
+  }
+  // Update errors from the server / clear out errors after 5 seconds
   useEffect(() => {
-    if (!updateTimer.current) {
-      updateTimer.current = setTimeout(() => {
-      dispatch(clearErrors());
-      setBadEntries([]);
-      updateTimer.current = null; }, 5000);
-    }
-  }, [errorMsg, dispatch]);
+    if (user) { history.push(redirect); }
+    else if (!updateTimer.current) { clearErrors(); }
+  }, [error, dispatch, history, user, redirect]);
   // Clear the timer on unmount
   useEffect(() => { return () => {
     updateTimer.current && clearTimeout(updateTimer.current); }; }, []);
@@ -36,61 +44,39 @@ const Login = () => {
     e.preventDefault();
     // Validate entries
     let errs = [];
-    if (username === "" || username === null)
-      errs.push("Please enter a valid username.");
-    if (password === "" || password === null)
+    if (entries.email === "" || entries.email === null)
+      errs.push("Please enter a valid emal address.");
+    if (entries.password === "" || entries.password === null)
       errs.push("Please enter a password.");
-    if (password.length > 0 && password.length < 8)
+    if (entries.password.length > 0 && entries.password.length < 8)
       errs.push("Passwords must be at least 8 characters in length.");
     setBadEntries(errs);
+
     // Attempt logging in
-    if (errs.length === 0) {
-      const currentUser = {
-        username: username,
-        password: password
-      };
-      dispatch(login(currentUser));
-    }
+    if (errs.length === 0) { dispatch(login(entries)); }
     // If there were entry errors, display them for 5 seconds
-    else {
-      if (!updateTimer.current) {
-        updateTimer.current = setTimeout(() => {
-        dispatch(clearErrors());
-        setBadEntries([]);
-        updateTimer.current = null; }, 5000);
-      }
-    }
+    else { !updateTimer.current && clearErrors(); }
   }
 
-  const errorMsgClasses =
-    " px-3 py-2 mb-2 font-semibold text-white rounded-lg " +
-    " bg-gradient-to-tl from-transparent via-red-700 to-gray-900 fadeError";
-
   return (
-    <main className="pt-36 pl-2 pr-2 sm:pr-0 sm:pt-10 sm:pl-44 flex">
-      <form className="relative flex flex-col sm:items-start items-center"
+    <main className="pt-36 pl-2 pr-2 sm:pr-0 sm:pt-32 sm:pl-32 flex">
+      <form className="relative flex flex-col sm:items-start items-center container-bg p-4 rounded-lg"
             onSubmit={onSubmit}>
-        <h1 className="sm:mr-2 mb-2 font-mont font-bold text-transparent bg-clip-text \
-          bg-gradient-to-b from-yellow-400 to-white text-xl">
-          Login: </h1>
-        <input type="text"
-               name="username"
-               placeholder="Username"
-               onChange={e => setUsername(e.target.value)}
-               className="p-1 mb-4 ml-8 sm:ml-0 font-mont font-semibold rounded" />
-        <input type="password"
-               name="password"
-               placeholder="Password"
-               onChange={e => setPassword(e.target.value)}
-               className="p-1 mb-4 ml-8 sm:ml-0 font-mont font-semibold rounded" />
-        <button type="submit"
-                className="mb-3 p-1 w-32 font-mont font-semibold rounded text-green-400 \
-                bg-gradient-to-b from-gray-100 via-gray-200 to-gray-100"
-                >Login</button>
-        { badEntries.map(err => <div className={errorMsgClasses}> {err} </div> )  }
-        { errorMsg && <div className={errorMsgClasses}> {errorMsg} </div> }
+        { loading ? <Spinner /> :
+          <div className="flex flex-col">
+            <h1 className={"sm:mr-2 mb-2 font-mont font-bold text-transparent bg-clip-text " +
+              "bg-gradient-to-b from-yellow-400 to-white text-xl"}>
+              Login: </h1>
+            <TextEntry name="email" type="email" label="Email:" placeholder="Email" labelColor="text-yellow-400"
+                   onChange={onEntry} />
+            <TextEntry name="password" type="password" label="Password:" placeholder="Password" labelColor="text-yellow-400"
+                   onChange={onEntry} extraClasses="mb-4" />
+            <Button type="submit" label="Login" extraClasses="mx-auto"/>
+            { badEntries.map(err => <Message error={err} /> )  }
+            { error && <Message error={error} /> }
+          </div>
+        }
       </form>
-      {isAuthenticated && <Redirect to="/upload" />}
     </main>
   )
 }
