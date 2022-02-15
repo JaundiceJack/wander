@@ -21,7 +21,6 @@ const Routes = () => {
       <Route exact path="/about"     component={About} />
       <Route exact path="/upload"    component={Upload} />
       <Route exact path="/login"     component={Login} />
-      //<Route exact path="/create"    component={Create} />
     </Switch>
   )
 }
