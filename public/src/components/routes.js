@@ -8,7 +8,7 @@ import History   from './galleries/history.js';
 import About     from './about.js';
 import Upload    from './upload/upload.js';
 import Login     from './upload/login.js';
-import Create    from './upload/create.js';
+//import Create    from './upload/create.js';
 
 const Routes = () => {
   return (
@@ -21,7 +21,7 @@ const Routes = () => {
       <Route exact path="/about"     component={About} />
       <Route exact path="/upload"    component={Upload} />
       <Route exact path="/login"     component={Login} />
-      <Route exact path="/create"    component={Create} />
+      //<Route exact path="/create"    component={Create} />
     </Switch>
   )
 }
